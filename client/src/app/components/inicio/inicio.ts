@@ -14,8 +14,16 @@ import { RouterLink } from '@angular/router';
     MatDivider,
     MatCardActions,
     MatIcon,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './inicio.html',
 })
-export class Inicio {}
+export class Inicio {
+  estiloNotas = [
+    { titulo: 'Inicio', conteudo: 'home'},
+    { titulo: 'Categorias', icone: 'bookmark', link: '/categorias' },
+    { titulo: 'Notas', icone: 'article', link: '/notas' },
+  ];
+}
+
+

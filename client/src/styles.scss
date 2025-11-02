@@ -3,6 +3,13 @@
 @use 'bootstrap/scss/bootstrap-utilities';
 @use '@angular/material' as mat;
 
+:root {
+  --note-bg: #fff7b1;
+  --note-edge: #f5e887;
+  --note-shadow: 0 12px 18px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.12);
+  --note-radius: 12px;
+}
+
 html {
   @include mat.theme(
     (
@@ -17,22 +24,14 @@ html {
 }
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
   color-scheme: light;
 
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
 
-  // Reset the user agent margin.
   margin: 0;
 }
-/* You can add global styles to this file, and also import other style files */
 
 html,
 body {
@@ -94,3 +93,85 @@ body {
     }
   }
 }
+
+.classroom-card.sticky-note {
+  border-radius: var(--note-radius);
+  overflow: visible; /* deixa a fita e a dobra aparecerem */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: linear-gradient(180deg, var(--note-bg), var(--note-edge) 85%);
+  box-shadow: var(--note-shadow);
+  position: relative;
+  isolation: isolate;
+  padding-top: 1.25rem; /* espaço visual pro “tape” */
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+    &::before {
+    content: "";
+    position: absolute;
+    top: -12px;
+    left: 28%;
+    width: 44%;
+    height: 22px;
+    background: repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,.7) 0 8px,
+      rgba(255,255,255,.85) 8px 16px
+    );
+    border-radius: 4px;
+    box-shadow: 0 6px 10px rgba(0,0,0,.12);
+    opacity: .95;
+    transform: rotate(-2deg);
+    z-index: 2;
+    }
+
+    &::after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, rgba(0,0,0,.12), rgba(0,0,0,0) 60%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    filter: blur(.2px);
+    opacity: .55;
+    pointer-events: none;
+    z-index: 1;
+    }
+
+    /* Material bits */
+    mat-card-content { min-height: 150px; }
+    mat-divider { opacity: .25; }
+
+    &:hover {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 18px 28px rgba(0,0,0,.22), 0 4px 10px rgba(0,0,0,.14);
+    }
+}
+
+/* link que ocupa o papel inteiro, sem “cara de link” */
+.note-tap { color: inherit; }
+
+/* rotações para parecer pregado à mão */
+.sticky-rot-0 { transform: rotate(-1.2deg); }
+.sticky-rot-1 { transform: rotate(.8deg); }
+.sticky-rot-2 { transform: rotate(-2.1deg); }
+.sticky-rot-3 { transform: rotate(.4deg); }
+.sticky-rot-4 { transform: rotate(1.6deg); }
+
+/* opcional: variantes de cor por categoria (usando utilities como base) */
+.classroom-card.sticky-note.bg-warning    { background: linear-gradient(180deg, #ffe066, #ffd43b 85%); }
+.classroom-card.sticky-note.bg-warning-subtle { background: linear-gradient(180deg, #fff7b1, #f7e989 85%); }
+
+/* ajusta ações do card para “respirar” como papel */
+.classroom-card.sticky-note .mat-mdc-card-actions {
+  padding: .25rem .5rem .5rem .5rem;
+}
+
+
+
+
+
+
