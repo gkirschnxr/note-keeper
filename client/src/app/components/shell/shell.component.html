@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
-    class="sidenav"
+    class="sidenav bg-dark"
     fixedInViewport
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
@@ -11,21 +11,25 @@
     <mat-nav-list>
       @for (item of itemsNavbar; track $index) {
         <a mat-list-item [routerLink]="item.link">
-          <mat-icon matListItemIcon>{{ item.icone }}</mat-icon>
-          {{ item.titulo }}
+          <mat-icon matListItemIcon class="text-white">{{ item.icone }}</mat-icon>
+          <div class="text-white">
+            {{ item.titulo }}
+          </div>
         </a>
       }
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      @if (isHandset$ | async) {
-      <button type="button" aria-label="Toggle sidenav" matIconButton (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      }
-      <span>Note Keeper</span>
-    </mat-toolbar>
+  <mat-sidenav-content class="content-shell">
+    <div class="bg-dark">
+      <mat-toolbar class="topbar">
+        @if (isHandset$ | async) {
+        <button type="button" aria-label="Toggle sidenav" matIconButton (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        }
+        <span class="text-white">Note Keeper</span>
+      </mat-toolbar>
+    </div>
     <!-- Add Content Here -->
     <div class="container-fluid">
       <ng-content></ng-content>

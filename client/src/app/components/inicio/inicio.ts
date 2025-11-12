@@ -1,29 +1,23 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
-import { MatDivider } from '@angular/material/divider';
-import { MatIcon } from '@angular/material/icon';
-import { RouterLink } from '@angular/router';
+import { StickyCardComponents } from "../sticky-card/sticky-card.components";
 
 @Component({
   selector: 'app-inicio',
+  standalone: true,
   imports: [
     MatButtonModule,
     MatCard,
     MatCardContent,
-    MatDivider,
-    MatCardActions,
-    MatIcon,
-    RouterLink,
-  ],
+    StickyCardComponents
+],
   templateUrl: './inicio.html',
 })
 export class Inicio {
   estiloNotas = [
-    { titulo: 'Inicio', conteudo: 'home'},
+    { titulo: 'Inicio', conteudo: 'home' },
     { titulo: 'Categorias', icone: 'bookmark', link: '/categorias' },
     { titulo: 'Notas', icone: 'article', link: '/notas' },
   ];
 }
-
-

@@ -3,13 +3,6 @@
 @use 'bootstrap/scss/bootstrap-utilities';
 @use '@angular/material' as mat;
 
-:root {
-  --note-bg: #fff7b1;
-  --note-edge: #f5e887;
-  --note-shadow: 0 12px 18px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.12);
-  --note-radius: 12px;
-}
-
 html {
   @include mat.theme(
     (
@@ -21,6 +14,18 @@ html {
       density: 0,
     )
   );
+}
+
+:root {
+  --app-menus: #3d3f41;
+  --app-textos: #fff;
+
+  --sticky-bg1: #fff7b1;
+  --sticky-bg2: #f5e887;
+  --note-shadow: 0 12px 18px rgba(0,0,0,.18), 0 2px 6px rgba(0,0,0,.12);
+  --note-radius: 12px;
+  --grid-size: 24px;
+  --grid-color: rgba(0,0,0,.08);
 }
 
 body {
@@ -45,70 +50,29 @@ body {
 // Bootstrap Override
 @media screen and (min-width: 900px) {
   .card-column {
-    flex: 0 0 350px; // quanto o elemento expande
+    flex: 0 0 350px;
     max-width: 350px;
   }
 }
 
 // Material Override
 .classroom-card {
-  border-radius: 16px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-
-  .card-hero {
-    position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 5;
-    background: center / cover no-repeat var(--hero-url, url('/img/card-header.jpg'));
-    cursor: pointer;
-
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.6) 100%);
-    }
-
-    &__title {
-      position: absolute;
-      left: 16px;
-      top: 16px;
-      color: #fff;
-      z-index: 1;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    }
-  }
-
-  mat-card-content {
-    min-height: 150px;
-  }
-
-  .card-actions {
-    padding: 4px 8px;
-    .spacer {
-      flex: 1 1 auto;
-    }
-  }
-}
-
-.classroom-card.sticky-note {
+  background: none;
   border-radius: var(--note-radius);
-  overflow: visible; /* deixa a fita e a dobra aparecerem */
+  overflow: visible;
   display: flex;
   flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  background: linear-gradient(180deg, var(--note-bg), var(--note-edge) 85%);
+  background: linear-gradient(180deg, var(--sticky-bg1), var(--sticky-bg2) 85%);
   box-shadow: var(--note-shadow);
   position: relative;
   isolation: isolate;
-  padding-top: 1.25rem; /* espaço visual pro “tape” */
+  padding-top: 1.25rem;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 
-    &::before {
-    content: "";
+  &::before {
+    // fita
+    content: '';
     position: absolute;
     top: -12px;
     left: 28%;
@@ -116,62 +80,97 @@ body {
     height: 22px;
     background: repeating-linear-gradient(
       45deg,
-      rgba(255,255,255,.7) 0 8px,
-      rgba(255,255,255,.85) 8px 16px
+      rgba(255, 255, 255, 0.568) 0 8px,
+      rgba(255, 255, 255, 0.85) 8px 16px
     );
     border-radius: 4px;
-    box-shadow: 0 6px 10px rgba(0,0,0,.12);
-    opacity: .95;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.12);
+    opacity: 0.95;
     transform: rotate(-2deg);
     z-index: 2;
-    }
+  }
 
-    &::after {
-    content: "";
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 26px;
-    height: 26px;
-    background: linear-gradient(135deg, rgba(0,0,0,.12), rgba(0,0,0,0) 60%);
-    clip-path: polygon(0 0, 100% 0, 100% 100%);
-    filter: blur(.2px);
-    opacity: .55;
-    pointer-events: none;
-    z-index: 1;
-    }
+  mat-card-content {
+    min-height: 150px;
+  }
+  mat-divider {
+    opacity: 0.25;
+  }
 
-    /* Material bits */
-    mat-card-content { min-height: 150px; }
-    mat-divider { opacity: .25; }
-
-    &:hover {
+  &:hover {
     transform: translateY(-2px) scale(1.01);
-    box-shadow: 0 18px 28px rgba(0,0,0,.22), 0 4px 10px rgba(0,0,0,.14);
-    }
+    box-shadow: 0 18px 28px rgba(0, 0, 0, 0.22), 0 4px 10px rgba(0, 0, 0, 0.14);
+  }
 }
 
-/* link que ocupa o papel inteiro, sem “cara de link” */
-.note-tap { color: inherit; }
-
-/* rotações para parecer pregado à mão */
-.sticky-rot-0 { transform: rotate(-1.2deg); }
-.sticky-rot-1 { transform: rotate(.8deg); }
-.sticky-rot-2 { transform: rotate(-2.1deg); }
-.sticky-rot-3 { transform: rotate(.4deg); }
-.sticky-rot-4 { transform: rotate(1.6deg); }
-
-/* opcional: variantes de cor por categoria (usando utilities como base) */
-.classroom-card.sticky-note.bg-warning    { background: linear-gradient(180deg, #ffe066, #ffd43b 85%); }
-.classroom-card.sticky-note.bg-warning-subtle { background: linear-gradient(180deg, #fff7b1, #f7e989 85%); }
-
-/* ajusta ações do card para “respirar” como papel */
-.classroom-card.sticky-note .mat-mdc-card-actions {
-  padding: .25rem .5rem .5rem .5rem;
+.mat-toolbar {
+  background-color: var(--app-menus) !important;
+  color: var(--app-textos) !important;
 }
 
+.mat-sidenav, .mat-drawer {
+  background-color: var(--app-menus) !important;
+  color: var(--app-textos) !important;
+}
 
+// Post-its:
 
+// rotações
+.sticky-rot-0 {
+  transform: rotate(-1.2deg);
+}
+.sticky-rot-1 {
+  transform: rotate(0.8deg);
+}
+.sticky-rot-2 {
+  transform: rotate(-2.1deg);
+}
+.sticky-rot-3 {
+  transform: rotate(0.4deg);
+}
+.sticky-rot-4 {
+  transform: rotate(1.6deg);
+}
 
+.card-column {
+  flex: 0 0 auto;
+}
 
+// controle de cantos arredondados
+.sticky-note.mat-mdc-card {
+  border-radius: 1% !important;
+}
 
+@media (max-width: 576px) {
+  .classroom-card.sticky-note {
+    width: 100%;
+    height: auto;
+    min-height: 180px;
+  }
+}
+
+.topbar.mat-toolbar {
+  position: relative;
+  z-index: 10
+}
+
+// Parede de azulejos
+.home-wall::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(248, 248, 248, 0.65); // opacidade
+  pointer-events: none;
+}
+
+.content-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background-color: var(--app-menus);
+}
+
+.container-fluid {
+  margin: 0%;
+  width: 100%;
+}

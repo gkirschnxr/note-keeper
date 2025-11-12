@@ -1,7 +1,6 @@
-<section class="stage max-vh-100 d-flex flex-column justify-content-center">
+<section class="stage mx-lg-4 d-flex flex-column justify-content-center">
   <div class="container pt-5">
-    <!-- POST-IT de introdução -->
-    <mat-card class="classroom-card sticky-note sticky-note--lg mx-auto mb-4">
+    <mat-card class="classroom-card sticky-note mx-auto mb-4">
       <mat-card-content>
         <div class="row g-3 align-items-center">
           <div class="col">
@@ -9,8 +8,8 @@
 
             <p class="mt-3 fs-6">
               Transforme suas ideias em ação. O NoteKeeper é o seu espaço pessoal para anotar
-              pensamentos, planejar tarefas e manter tudo sob controle — simples, rápido e acessível de
-              qualquer lugar.
+              pensamentos, planejar tarefas e manter tudo sob controle — simples, rápido e acessível
+              de qualquer lugar.
             </p>
 
             <ul class="fs-6 mb-2">
@@ -19,7 +18,9 @@
               <li>🔒 Mantenha tudo seguro, com seus dados sempre protegidos.</li>
             </ul>
 
-            <p class="fs-6 mb-0">Comece agora e descubra uma maneira mais inteligente de cuidar da sua rotina.</p>
+            <p class="fs-6 mb-0">
+              Comece agora e descubra uma maneira mais inteligente de cuidar da sua rotina.
+            </p>
           </div>
 
           <div class="col-lg-3 text-center">
@@ -29,38 +30,24 @@
       </mat-card-content>
     </mat-card>
 
-<div class="row g-3 my-2 align-items-center justify-content-center">
-  <div class="col-lg-3 card-column mx-4">
-    <mat-card class="classroom-card sticky-note sticky-rot-0">
-      <a routerLink="/categorias" class="note-tap d-block text-decoration-none text-dark">
-        <h4 class="mb-2 fw-bold px-3">Categorias</h4>
-        <mat-card-content class="pt-1">
-          <p class="mb-0 small opacity-75 px-4 mt-3">Organize por cores e prioridades!</p>
-        </mat-card-content>
-      </a>
-      <mat-divider></mat-divider>
-      <mat-card-actions align="end">
-        <a routerLink="/categorias" mat-icon-button aria-label="Abrir categorias">
-          <mat-icon>arrow_outward</mat-icon>
-        </a>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+    <div class="row g-3 my-2 align-items-center justify-content-center">
+      <div class="col-auto col-column mx-4">
+        <app-sticky-card
+          titulo="Notas"
+          descricao="Anote ideias em segundos!"
+          route="/notas"
+          [rotacao]="0"
+        ></app-sticky-card>
+      </div>
 
-  <div class="col-lg-3 card-column mx-4">
-    <mat-card class="classroom-card sticky-note sticky-rot-1">
-      <a routerLink="/notas" class="note-tap d-block text-decoration-none text-dark">
-        <h4 class="mb-2 fw-bold px-3">Notas</h4>
-        <mat-card-content class="pt-1">
-          <p class="mb-0 small opacity-75 px-5 mt-3">Anote ideias em segundos!</p>
-        </mat-card-content>
-      </a>
-      <mat-divider></mat-divider>
-      <mat-card-actions align="end">
-        <a routerLink="/notas" mat-icon-button aria-label="Abrir notas">
-          <mat-icon>arrow_outward</mat-icon>
-        </a>
-      </mat-card-actions>
-    </mat-card>
+      <div class="col-auto col-column mx-4">
+        <app-sticky-card
+          titulo="Categorias"
+          descricao="Organize por cores e prioridades!"
+          route="/categorias"
+          [rotacao]="1"
+        ></app-sticky-card>
+      </div>
+    </div>
   </div>
-</div>
+</section>

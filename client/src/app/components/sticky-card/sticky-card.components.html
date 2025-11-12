@@ -1,0 +1,17 @@
+<mat-card class="classroom-card sticky-note sticky-rot-{{ rotacao }}">
+  <a [routerLink]="route" class="note-tap d-block text-decoration-none text-dark">
+    <h4 class="mb-2 fw-bold px-3">{{ titulo }}</h4>
+
+    <mat-card-content class="pt-1">
+      <p class="mb-0 small opacity-75 px-4 mt-3">
+        {{ descricao }}
+      </p>
+    </mat-card-content>
+  </a>
+
+  <mat-card-actions align="end">
+    <a [routerLink]="route" mat-icon-button aria-label="Abrir card">
+      <mat-icon>arrow_outward</mat-icon>
+    </a>
+  </mat-card-actions>
+</mat-card>
