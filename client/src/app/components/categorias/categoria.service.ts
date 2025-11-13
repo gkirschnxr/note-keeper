@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { ListagemCategoriasApiResponse, ListagemCategoriasModel } from './categoria.models';
+import { CadastrarCategoriaModel, CadastrarCategoriaResponseModel, ListagemCategoriasApiResponse, ListagemCategoriasModel } from './categoria.models';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +10,10 @@ import { ListagemCategoriasApiResponse, ListagemCategoriasModel } from './catego
 export class CategoriaService {
   private readonly http = inject(HttpClient);
   private readonly apiUrl = environment.apiUrl + '/categorias';
+
+  public cadastrar(categoriaModel: CadastrarCategoriaModel) : Observable<CadastrarCategoriaResponseModel> {
+    return this.http.post<CadastrarCategoriaResponseModel>(this.apiUrl, categoriaModel)
+  }
 
   public selecionarTodas(): Observable<ListagemCategoriasModel[]> {
     return this.http
